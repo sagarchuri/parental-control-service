@@ -22,11 +22,13 @@ mvn test
 
 
 <h4>Run </h4>
-Application can be run using command line.
+
+Application can be run using command line.<br/>
 
 mvn exec:java
 
 <h4>Design</h4>
+
 ParentalControlService depends on MovieService and VerifyControlLevelService. VerifyControlLevelService verifies whether parental control is ok.
 CallbackMessage is used to pass additional information about the service call. 	
 
