@@ -33,3 +33,8 @@ ParentalControlService depends on MovieService and VerifyControlLevelService. Ve
 CallbackMessage is used to pass additional information about the service call. 	
 
 
+<h4>Debugging</h4>
+
+Log4j2 is used for logging and debugging purpose.
+
+
