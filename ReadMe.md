@@ -9,7 +9,7 @@ Java Version = 1.8
 
 <h4>Build</h4>
 
-Maven is used as a buuild tool. To perform build run following command.
+Maven is used as a build tool. To perform build, run following command.
 
 mvn install
 
@@ -29,8 +29,7 @@ mvn exec:java
 
 <h4>Design</h4>
 
-ParentalControlService depends on MovieService and VerifyControlLevelService. VerifyControlLevelService verifies whether parental control is ok.
-CallbackMessage is used to pass additional information about the service call. 	
+ParentalControlService depends on MovieService and VerifyControlLevelService. VerifyControlLevelService verifies whether parental control level is withing acceptable limit. CallbackMessage is used to pass additional information about the service call. 	
 
 
 <h4>Debugging</h4>
