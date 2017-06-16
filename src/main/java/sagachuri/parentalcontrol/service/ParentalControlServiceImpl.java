@@ -24,33 +24,30 @@ public class ParentalControlServiceImpl implements ParentalControlService{
 	}
 
 	public Boolean isMovieAllowedToWatch(final String pControlLevel, final String movieId,final CallbackMessage callback) {
+		String callbackMessage = "";
 		try{
 			logger.info("isMovieAllowedToWatch is called with parentcontrol {} movieId {} callback {}"
 					,pControlLevel,movieId,callback);
 			//check if the service is available 
 			if(movieService == null) {
 				logger.log(Level.WARN,"movieService is null. returning false");
-				if(callback != null){
-					callback.setMessage(CallbackMessage.MOVIE_SERVICE_NOT_INITIALISED);
-				}
-				return false;
+				callbackMessage = CallbackMessage.MOVIE_SERVICE_NOT_INITIALISED;
 			}
-			if(controlLevelService == null) {
+			else if(controlLevelService == null) {
 				logger.log(Level.WARN,"controlLevelService is null. returning false");
-				if(callback != null){
-					callback.setMessage(CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED);
-				}
-				return false;
+				callbackMessage = CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED;
 			}
-			String movieParentalLevel = movieService.getParentalControlLevel(movieId);
-			return controlLevelService.isControlLevelOK(pControlLevel, movieParentalLevel);
-			
+			else{
+				String movieParentalLevel = movieService.getParentalControlLevel(movieId);
+				return controlLevelService.isControlLevelOK(pControlLevel, movieParentalLevel);
+			}
 		}catch(TitleNotFoundException | TechnicalFailureException  e){
-			if(callback != null){
-				callback.setMessage(e.getMessage());
-			}
+			callbackMessage = e.getMessage();
 			logger.log(Level.WARN,
 					"Exception thrown while invoking MovieService.getParentalControlLevel :" +e.getMessage());
+		}
+		if(callback != null){
+			callback.setMessage(callbackMessage);
 		}
 		return false;
 	}
