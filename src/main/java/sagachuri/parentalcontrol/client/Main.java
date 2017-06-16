@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args){
 		
-		System.out.println("****Welcome to the Parent control Service****");
+		System.out.println("****Welcome to the Parental control Service****");
 		System.out.print("Parental control levels are : ");
 		for(ParentalControlLevel p :ParentalControlLevel.values()) {
 			System.out.print(p.getLevel()+ " ");
