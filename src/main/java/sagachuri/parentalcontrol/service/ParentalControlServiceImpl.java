@@ -35,9 +35,15 @@ public class ParentalControlServiceImpl implements ParentalControlService{
 				}
 				return false;
 			}
-			
+			if(controlLevelService == null) {
+				logger.log(Level.WARN,"controlLevelService is null. returning false");
+				if(callback != null){
+					callback.setMessage(CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED);
+				}
+				return false;
+			}
 			String movieParentalLevel = movieService.getParentalControlLevel(movieId);
-			return isPreferredLevelOk(pControlLevel, movieParentalLevel,callback);
+			return controlLevelService.isControlLevelOK(pControlLevel, movieParentalLevel);
 			
 		}catch(TitleNotFoundException | TechnicalFailureException  e){
 			if(callback != null){
@@ -49,15 +55,4 @@ public class ParentalControlServiceImpl implements ParentalControlService{
 		return false;
 	}
 
-	private boolean isPreferredLevelOk(String pControlLevel,String movieParentalLevel,final CallbackMessage callback){
-		//check if the service is available 
-		if(controlLevelService == null) {
-			logger.log(Level.WARN,"controlLevelService is null. returning false");
-			if(callback != null){
-				callback.setMessage(CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED);
-			}
-			return false;
-		}
-		return controlLevelService.isControlLevelOK(pControlLevel, movieParentalLevel);
-	}
 }
