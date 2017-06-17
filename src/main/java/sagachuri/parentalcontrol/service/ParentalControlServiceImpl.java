@@ -23,33 +23,44 @@ public class ParentalControlServiceImpl implements ParentalControlService{
 		this.controlLevelService = controlLevelService;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see sagachuri.parentalcontrol.service.ParentalControlService#isMovieAllowedToWatch(java.lang.String, java.lang.String, sagachuri.parentalcontrol.data.CallbackMessage)
+	 */
 	public Boolean isMovieAllowedToWatch(final String pControlLevel, final String movieId,final CallbackMessage callback) {
-		String callbackMessage = "";
 		try{
 			logger.info("isMovieAllowedToWatch is called with parentcontrol {} movieId {} callback {}"
 					,pControlLevel,movieId,callback);
 			//check if the service is available 
 			if(movieService == null) {
 				logger.log(Level.WARN,"movieService is null. returning false");
-				callbackMessage = CallbackMessage.MOVIE_SERVICE_NOT_INITIALISED;
+				setCallbackMessage(callback, CallbackMessage.MOVIE_SERVICE_NOT_INITIALISED);
 			}
 			else if(controlLevelService == null) {
 				logger.log(Level.WARN,"controlLevelService is null. returning false");
-				callbackMessage = CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED;
+				setCallbackMessage(callback, CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED);
 			}
 			else{
 				String movieParentalLevel = movieService.getParentalControlLevel(movieId);
 				return controlLevelService.isControlLevelOK(pControlLevel, movieParentalLevel);
 			}
 		}catch(TitleNotFoundException | TechnicalFailureException  e){
-			callbackMessage = e.getMessage();
+			setCallbackMessage(callback, e.getMessage());
 			logger.log(Level.WARN,
 					"Exception thrown while invoking MovieService.getParentalControlLevel :" +e.getMessage());
 		}
-		if(callback != null){
-			callback.setMessage(callbackMessage);
-		}
 		return false;
+	}
+	
+	/**
+	 * Sets Callback message
+	 * @param callback
+	 * @param message
+	 */
+	private void setCallbackMessage(final CallbackMessage callback, final String message){
+		if(callback != null){
+			callback.setMessage(message);
+		}
 	}
 
 }
