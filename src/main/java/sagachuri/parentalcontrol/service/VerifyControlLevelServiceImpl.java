@@ -11,6 +11,10 @@ public class VerifyControlLevelServiceImpl implements VerifyControlLevelService{
 	private static final String CLASSNAME = "sagarchuri.parentalcontrol.data.ParentalControlLevel.VerifyControlLevelServiceImpl";
 	private static final Logger logger = LogManager.getLogger(CLASSNAME);
     
+	/*
+	 * (non-Javadoc)
+	 * @see sagachuri.parentalcontrol.service.VerifyControlLevelService#isControlLevelOK(java.lang.String, java.lang.String)
+	 */
 	public Boolean isControlLevelOK(final String preferredLevel, final String movieLevel) {
 		logger.info("isControlLevelOK is called with preferredLevel {} movieLevel",preferredLevel,movieLevel);
 		ParentalControlLevel preferred  = getParentalControlLevel(preferredLevel);
@@ -30,6 +34,11 @@ public class VerifyControlLevelServiceImpl implements VerifyControlLevelService{
 		return false;
 	}
 	
+	/**
+	 * Returns Parental control level enum for the given level 
+	 * @param level
+	 * @return
+	 */
 	private ParentalControlLevel getParentalControlLevel(String level) {
 		if(level == null) return null;
 		else{
