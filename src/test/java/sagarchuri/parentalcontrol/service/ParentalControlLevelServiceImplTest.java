@@ -13,6 +13,8 @@ import sagachuri.parentalcontrol.service.ParentalControlService;
 import sagachuri.parentalcontrol.service.ParentalControlServiceImpl;
 import sagachuri.parentalcontrol.service.VerifyControlLevelService;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -45,7 +47,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("15", "ABC", callbackMessage);
 		
-		assert(output == true);
+		assertTrue(output);
 		verifyZeroInteractions(callbackMessage);
 		verify(verifyControlLevelService,times(1)).isControlLevelOK("15","15");
 	}
@@ -60,7 +62,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("U", "XYZ", callbackMessage);
 		
-		assert(output == false);
+		assertFalse(output);
 		verifyZeroInteractions(callbackMessage);
 		verify(verifyControlLevelService,times(1)).isControlLevelOK("U","PG");
 	}
@@ -75,7 +77,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("INVALID", "XYZ", callbackMessage);
 		
-		assert(output == false);
+		assertFalse(output);
 		verify(callbackMessage).setMessage(eq(CallbackMessage.TITLE_NOT_FOUND_EXCEPTION_MESSAGE));
 		verifyZeroInteractions(verifyControlLevelService);
 	}
@@ -90,7 +92,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("15", "PQ", callbackMessage);
 		
-		assert(output == false);
+		assertFalse(output);
 		verify(callbackMessage).setMessage(eq(CallbackMessage.TECHNICAL_FAILURE_EXCEPTION_MESSAGE));
 		verifyZeroInteractions(verifyControlLevelService);
 	}
@@ -106,7 +108,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("15", "PQ", callbackMessage);
 		
-		assert(output == false);
+		assertFalse(output);
 		verify(callbackMessage).setMessage(eq(CallbackMessage.MOVIE_SERVICE_NOT_INITIALISED));
 		verifyZeroInteractions(verifyControlLevelService);
 	}
@@ -122,7 +124,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("15", "PQ", callbackMessage);
 		
-		assert(output == false);
+		assertFalse(output);
 		verify(callbackMessage).setMessage(eq(CallbackMessage.PARENTAL_CONTROL_SERVICE_NOT_INITIALISED));
 		verifyZeroInteractions(verifyControlLevelService);
 	}
@@ -138,7 +140,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("15", "PQ", null);
 		
-		assert(output == true);
+		assertTrue(output);
 		verifyZeroInteractions(callbackMessage);
 		verify(verifyControlLevelService,times(1)).isControlLevelOK("15","12");
 	}
@@ -154,7 +156,7 @@ public class ParentalControlLevelServiceImplTest {
 		
 		final boolean output = parentalControlService.isMovieAllowedToWatch("18", "ST", callbackMessage);
 		
-		assert(output == true);
+		assertTrue(output);
 		verifyZeroInteractions(callbackMessage);
 		verify(verifyControlLevelService,times(1)).isControlLevelOK("18","18");
 	}

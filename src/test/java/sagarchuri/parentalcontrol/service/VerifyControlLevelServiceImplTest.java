@@ -1,5 +1,8 @@
 package sagarchuri.parentalcontrol.service;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,37 +26,37 @@ public class VerifyControlLevelServiceImplTest {
 
 	@Test
 	public void isControlLevelOKFailTest(){
-		assert(verifyControlLevelService.isControlLevelOK("PG", "15") == false);
+		assertFalse(verifyControlLevelService.isControlLevelOK("PG", "15"));
 	}
 	
 	@Test
 	public void isControlLevelOKPassTest(){
-		assert(verifyControlLevelService.isControlLevelOK("15", "PG") == true);
+		assertTrue(verifyControlLevelService.isControlLevelOK("15", "PG"));
 	}
 	
 	@Test
 	public void isControlLevelOKEqualTest(){
-		assert(verifyControlLevelService.isControlLevelOK("15", "15") == true);
+		assertTrue(verifyControlLevelService.isControlLevelOK("15", "15"));
 	}
 	
 	@Test
 	public void isControlLevelOKInvalidTest(){
-		assert(verifyControlLevelService.isControlLevelOK("U", "he") == false);
+		assertFalse(verifyControlLevelService.isControlLevelOK("U", "he"));
 	}
 	
 	@Test
 	public void isControlLevelOKUPGTest(){
-		assert(verifyControlLevelService.isControlLevelOK("U", "PG") == false);
+		assertFalse(verifyControlLevelService.isControlLevelOK("U", "PG"));
 	}
 	
 	@Test
 	public void isControlLevelOKEighteenUTest(){
-		assert(verifyControlLevelService.isControlLevelOK("18", "U") == true);
+		assertTrue(verifyControlLevelService.isControlLevelOK("18", "U"));
 	}
 	
 	@Test
 	public void isControlLevelOKNullTest(){
-		assert(verifyControlLevelService.isControlLevelOK(null,null) == false);
+		assertFalse(verifyControlLevelService.isControlLevelOK(null,null));
 	}
 	
 }
