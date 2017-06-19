@@ -1,38 +1,38 @@
-<h2>Parental Control Service</h2>
+# Parental Control Service
 
-Parental control service prevents access to movies based on preantal control level
+Parental control service prevents access to movies based on parental control level
 
-<h4>System requirements</h4>
+## System requirements
 
 Java Version = 1.8
 
 
-<h4>Build</h4>
+### Build
 
 Maven is used as a build tool. To perform build, run following command.
 
-mvn install
+`mvn install`
 
 
-<h4>Tests</h4>
+### Tests
 
 Test cases are written with Junits and Mockito framework. To run test cases run 
 
-mvn test
+`mvn test`
 
 
-<h4>Run </h4>
+### Run
 
 Application can be run using command line.<br/>
 
-mvn exec:java
+`mvn exec:java`
 
-<h4>Design</h4>
+### Design
 
 ParentalControlService depends on MovieService and VerifyControlLevelService. VerifyControlLevelService verifies whether parental control level is withing acceptable limit. CallbackMessage is used to pass additional information about the service call. 	
 
 
-<h4>Debugging</h4>
+### Debugging
 
 Log4j2 is used for logging and debugging purpose.
 
