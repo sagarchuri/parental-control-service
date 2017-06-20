@@ -2,10 +2,15 @@
 
 Parental control service prevents access to movies based on parental control level
 
-## System requirements
+### System requirements
 
 Java Version = 1.8
 
+### Continous Integration
+
+[![Build Status](https://travis-ci.org/sagarchuri/parental-control-service.svg?branch=master)](https://travis-ci.org/sagarchuri/parental-control-service)
+
+Continous Integration is configured via Travis CI
 
 ### Build
 
